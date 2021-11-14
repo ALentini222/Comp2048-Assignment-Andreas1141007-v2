@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Comp2048_Assignment_Andreas1141007.Data;
 using Comp2048_Assignment_Andreas1141007.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Comp2048_Assignment_Andreas1141007.Controllers
 {
+    [Authorize]
     public class GamesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,12 +22,14 @@ namespace Comp2048_Assignment_Andreas1141007.Controllers
         }
 
         // GET: Games
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Games.ToListAsync());
         }
 
         // GET: Games/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

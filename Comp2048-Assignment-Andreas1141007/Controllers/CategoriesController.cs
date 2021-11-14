@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Comp2048_Assignment_Andreas1141007.Data;
 using Comp2048_Assignment_Andreas1141007.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Comp2048_Assignment_Andreas1141007.Controllers
-{
+{   
+    [Authorize]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
