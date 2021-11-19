@@ -20,3 +20,5 @@ https://comp2048-assignment-andreas114100720211113215049.azurewebsites.net/
 
 New website released with SmarterASP.NET
 http://andreaslentini-001-site1.itempurl.com/Games
+
+Due to issues with the new website and being unfarmilliar with the sites procedures I have not yet been able to re-upload the full list of games into the database but the website is now functional once again as of 11/19/2021
