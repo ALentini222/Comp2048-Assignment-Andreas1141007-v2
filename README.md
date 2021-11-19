@@ -17,3 +17,6 @@ Google User Auth Created and functional
 Populated Database with games and displayed on website.
 
 https://comp2048-assignment-andreas114100720211113215049.azurewebsites.net/
+
+New website released with SmarterASP.NET
+http://andreaslentini-001-site1.itempurl.com/Games
