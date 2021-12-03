@@ -14,6 +14,7 @@ namespace Comp2048_Assignment_Andreas1141007.Controllers
     [Authorize]
     public class GamesController : Controller
     {
+        
         private readonly ApplicationDbContext _context;
 
         public GamesController(ApplicationDbContext context)
@@ -21,38 +22,37 @@ namespace Comp2048_Assignment_Andreas1141007.Controllers
             _context = context;
         }
 
-        // GET: Games
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Games.ToListAsync());
+            //, await _context.Games.Include(g => g.AverageRating).OrderBy(g => g.GameId).ThenBy(g => g.GameName).ToListAsync()
+            return View("Index", await _context.Games.ToListAsync());
         }
 
-        // GET: Games/Details/5
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             var game = await _context.Games
                 .FirstOrDefaultAsync(m => m.GameId == id);
             if (game == null)
             {
-                return NotFound();
+                return View("404");
             }
 
-            return View(game);
+            return View("Details", game);
         }
 
         // GET: Games/Create
         public IActionResult Create()
         {
-            return View();
-        }
+            return View("Create");
 
+         }
         // POST: Games/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
