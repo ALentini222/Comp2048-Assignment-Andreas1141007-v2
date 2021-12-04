@@ -50,6 +50,7 @@ namespace Comp2048_Assignment_Andreas1141007.Controllers
         // GET: Games/Create
         public IActionResult Create()
         {
+            ViewData["GameId"] = new SelectList(_context.Games, "GameId", "GameName");
             return View("Create");
 
          }
@@ -66,7 +67,8 @@ namespace Comp2048_Assignment_Andreas1141007.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(game);
+            else
+            return View("Create", game);
         }
 
         // GET: Games/Edit/5
@@ -74,15 +76,15 @@ namespace Comp2048_Assignment_Andreas1141007.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             var game = await _context.Games.FindAsync(id);
             if (game == null)
             {
-                return NotFound();
+                return View("404");
             }
-            return View(game);
+            return View("Edit", game);
         }
 
         // POST: Games/Edit/5
@@ -94,7 +96,7 @@ namespace Comp2048_Assignment_Andreas1141007.Controllers
         {
             if (id != game.GameId)
             {
-                return NotFound();
+                return View("404");
             }
 
             if (ModelState.IsValid)
@@ -108,7 +110,7 @@ namespace Comp2048_Assignment_Andreas1141007.Controllers
                 {
                     if (!GameExists(game.GameId))
                     {
-                        return NotFound();
+                        return View("404");
                     }
                     else
                     {
@@ -117,7 +119,7 @@ namespace Comp2048_Assignment_Andreas1141007.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(game);
+            return View("Edit", game);
         }
 
         // GET: Games/Delete/5
