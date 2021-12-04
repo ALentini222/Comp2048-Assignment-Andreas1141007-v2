@@ -68,6 +68,7 @@ namespace Comp2048_Assignment_Andreas1141007.Controllers
                 return RedirectToAction(nameof(Index));
             }
             else
+            ViewData["GameId"] = new SelectList(_context.Games, "GameId", "GameName");
             return View("Create", game);
         }
 
@@ -127,17 +128,17 @@ namespace Comp2048_Assignment_Andreas1141007.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             var game = await _context.Games
                 .FirstOrDefaultAsync(m => m.GameId == id);
             if (game == null)
             {
-                return NotFound();
+                return View("404");
             }
 
-            return View(game);
+            return View("Delete",game);
         }
 
         // POST: Games/Delete/5

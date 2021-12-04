@@ -139,6 +139,16 @@ namespace Comp2048_Assignment_Andreas1141007_Test
             // assert         
             Assert.AreEqual("Create", viewResult.ViewName);
         }
+        /*
+        [TestMethod]
+        public void CreateGameToDb()
+        {
+            var game = new Game { GameId = 4, GameName = "Gaming", AveragePlaytime=44,AverageRating = 6 };
+            _context.Games.Add(game);
+            _context.SaveChanges();
+            Assert.AreEqual(game, _context.Games.ToArray()[3]);
+        }
+        */
         #endregion
         #region Edit
         [TestMethod]
@@ -174,7 +184,47 @@ namespace Comp2048_Assignment_Andreas1141007_Test
         }
         #endregion
         #region Delete
+        [TestMethod]
+        public void DeleteNullId()
+        {
+            var result = (ViewResult)controller.Delete(null).Result;
+            Assert.AreEqual("404", result.ViewName);
+        }
 
+        [TestMethod]
+        public void DeleteIdNotExists()
+        {
+            var result = (ViewResult)controller.Delete(99).Result;
+            Assert.AreEqual("404", result.ViewName);
+        }
+        [TestMethod]
+        public void DeleteIdExists()
+        {
+            var result = (ViewResult)controller.Delete(2).Result;
+            Assert.AreEqual("Delete", result.ViewName);
+        }
+        [TestMethod]
+        public void DeleteGame()
+        {
+            var result = (ViewResult)controller.Delete(2).Result;
+            Game game = (Game)result.Model;
+
+            Assert.AreEqual(games[0], game);
+        }
+        [TestMethod]
+        public void DeleteConfirmedSuccess()
+        {
+            var result = controller.DeleteConfirmed(2);
+            var product = _context.Games.Find(2);
+            Assert.AreEqual(product, null);
+        }
+        [TestMethod]
+        public void DeleteConfirmedRedirectIndex()
+        {
+            var result = controller.DeleteConfirmed(2); 
+            var actionResult = (RedirectToActionResult)result.Result;
+            Assert.AreEqual("Index", actionResult.ActionName);
+        }
         #endregion
     }
 }
