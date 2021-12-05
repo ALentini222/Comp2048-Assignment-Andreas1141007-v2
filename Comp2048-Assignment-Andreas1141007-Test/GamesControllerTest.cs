@@ -139,16 +139,16 @@ namespace Comp2048_Assignment_Andreas1141007_Test
             // assert         
             Assert.AreEqual("Create", viewResult.ViewName);
         }
-        /*
+
         [TestMethod]
         public void CreateGameToDb()
         {
-            var game = new Game { GameId = 4, GameName = "Gaming", AveragePlaytime=44,AverageRating = 6 };
+            var game = new Game { GameId = 4, GameName = "Gaming", AveragePlaytime = 44, AverageRating = 6 };
             _context.Games.Add(game);
             _context.SaveChanges();
             Assert.AreEqual(game, _context.Games.ToArray()[3]);
         }
-        */
+        
         #endregion
         #region Edit
         [TestMethod]
@@ -225,6 +225,8 @@ namespace Comp2048_Assignment_Andreas1141007_Test
             var actionResult = (RedirectToActionResult)result.Result;
             Assert.AreEqual("Index", actionResult.ActionName);
         }
-        #endregion
+        #endregion   
     }
+
+ 
 }
